@@ -1,0 +1,16 @@
+# two scripts that cut a protein molecule in specific residues 
+
+from prody import *
+model = parsePDB('output.pdb')
+extract = model.select('chain A resnum 40to40')
+writePDB('40ARGH++.pdb', extract)
+
+
+  
+import gemmi
+
+st = gemmi.read_structure('output.pdb')
+
+
+subset = gemmi.parse_cid('/*/*/4-4').copy_structure_selection(st)
+subset.write_minimal_pdb('4playmolecule.pdb')
